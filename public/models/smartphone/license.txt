@@ -1,0 +1,11 @@
+Model Information:
+* title:	Smartphone
+* source:	https://sketchfab.com/3d-models/smartphone-51659a712290405e83256fe3f6284648
+* author:	germydan (https://sketchfab.com/germydan)
+
+Model License:
+* license type:	CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions can not be distributed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Smartphone" (https://sketchfab.com/3d-models/smartphone-51659a712290405e83256fe3f6284648) by germydan (https://sketchfab.com/germydan) licensed under CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)
