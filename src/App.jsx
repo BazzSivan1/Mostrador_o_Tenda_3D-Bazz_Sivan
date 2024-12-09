@@ -29,7 +29,7 @@ light.rotation.set( 45, 45, 0 )
 light.castShadow = true
 scene.add( light )
 
-const ambientLight = new Three.AmbientLight( 0x404040 )
+const ambientLight = new Three.AmbientLight( 0xffffff )
 scene.add( ambientLight )
 
 // controls
