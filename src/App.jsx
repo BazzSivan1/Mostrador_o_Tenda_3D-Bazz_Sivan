@@ -37,14 +37,14 @@ scene.add( ambientLight )
 const controls = new OrbitControls( camera, renderer.domElement )
 
 // model shelves
-let model
+let shelves
 modelLoader.load( "models/shelves/shelves.gltf",
   (gltf) => {
-    model = gltf.scene
-    model.scale.set( 2, 2, 2 )
-    model.position.set( 0, -30, 0 )
-    model.rotation.set( 0, 90 * Math.PI / 4, 0 )
-    scene.add( model )
+    shelves = gltf.scene
+    shelves.scale.set( 2, 2, 2 )
+    shelves.position.set( 0, -30, 0 )
+    shelves.rotation.set( 0, 90 * Math.PI / 4, 0 )
+    scene.add( shelves )
     // carregat
   },
   (xhr) => {
@@ -80,9 +80,6 @@ function App() {
   const currentTime = Date.now()
   const daltaTime = currentTime - time
   time = currentTime
-
-  if (model) {
-  }
 
   renderer.render( scene, camera )
 }
