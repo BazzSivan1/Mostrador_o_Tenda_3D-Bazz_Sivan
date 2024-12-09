@@ -19,7 +19,7 @@ const textureLoader = new Three.TextureLoader()
 const modelLoader = new GLTFLoader()
 
 const camera = new Three.PerspectiveCamera( 75, width / height, 0.1, 1000 )
-camera.position.set( 40, 20 , 0 )
+camera.position.set( 40, 10 , 0 )
 camera.rotation.set( 90 * Math.PI / 4, 0, 0 )
 
 const scene = new Three.Scene()
