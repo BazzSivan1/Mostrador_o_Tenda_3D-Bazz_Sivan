@@ -19,7 +19,8 @@ const textureLoader = new Three.TextureLoader()
 const modelLoader = new GLTFLoader()
 
 const camera = new Three.PerspectiveCamera( 75, width / height, 0.1, 1000 )
-camera.position.set( 0, 5 , 5 )
+camera.position.set( 40, 20 , 0 )
+camera.rotation.set( 90 * Math.PI / 4, 0, 0 )
 
 const scene = new Three.Scene()
 
@@ -34,6 +35,26 @@ scene.add( ambientLight )
 
 // controls
 const controls = new OrbitControls( camera, renderer.domElement )
+
+// model shelves
+let model
+modelLoader.load( "models/shelves/shelves.gltf",
+  (gltf) => {
+    model = gltf.scene
+    model.scale.set( 2, 2, 2 )
+    model.position.set( 0, -30, 0 )
+    model.rotation.set( 0, 90 * Math.PI / 4, 0 )
+    scene.add( model )
+    // carregat
+  },
+  (xhr) => {
+    console.log( ( xhr.loaded / xhr.total ) * 100 + "% loaded" )
+    // cada iteracio
+  },
+  (error) => {
+    // error
+  }
+)
 
 window.addEventListener('resize', () => {
   const width = window.innerWidth;
@@ -59,6 +80,9 @@ function App() {
   const currentTime = Date.now()
   const daltaTime = currentTime - time
   time = currentTime
+
+  if (model) {
+  }
 
   renderer.render( scene, camera )
 }
