@@ -35,25 +35,6 @@ scene.add( ambientLight )
 // controls
 const controls = new OrbitControls( camera, renderer.domElement )
 
-// sphere
-const sphereGeo = new Three.SphereGeometry( 1, 32, 16 )
-const sphereMat = new Three.MeshStandardMaterial( { 
-  color: 0xffffff
- } )
-const sphere = new Three.Mesh( sphereGeo, sphereMat )
-sphere.castShadow = true
-scene.add( sphere )
-
-// pla
-const plaGeo = new Three.PlaneGeometry( 15, 15 )
-const plaMat = new Three.MeshStandardMaterial( { color: 0xffffff,
-  side: Three.DoubleSide } )
-const pla = new Three.Mesh( plaGeo, plaMat )
-pla.position.set( 0, -5, 0 )
-pla.rotation.set( 90 * Math.PI / 4, 0, 0 )
-pla.receiveShadow = true
-scene.add( pla )
-
 window.addEventListener('resize', () => {
   const width = window.innerWidth;
   const height = window.innerHeight;
@@ -78,12 +59,6 @@ function App() {
   const currentTime = Date.now()
   const daltaTime = currentTime - time
   time = currentTime
-
-  sphere.rotateX( 0.001 * daltaTime )
-  sphere.rotateY( 0.001 * daltaTime )
-  sphere.rotateZ( 0.001 * daltaTime )
-
-  camera.lookAt( sphere.position )
 
   renderer.render( scene, camera )
 }
