@@ -45,14 +45,54 @@ modelLoader.load( "models/shelves/shelves.gltf",
     shelves.position.set( 0, -30, 0 )
     shelves.rotation.set( 0, 90 * Math.PI / 4, 0 )
     scene.add( shelves )
-    // carregat
   },
   (xhr) => {
     console.log( ( xhr.loaded / xhr.total ) * 100 + "% loaded" )
-    // cada iteracio
+  }
+)
+
+// model smartphone
+let smartphone
+modelLoader.load( "models/smartphone/scene.gltf",
+  (gltf) => {
+    smartphone = gltf.scene
+    smartphone.scale.set( 0.125, 0.125, 0.125 )
+    smartphone.position.set( 8, 6.62, -9 )
+    smartphone.rotation.set( 0, 90 * Math.PI / 4, 0 )
+    scene.add( smartphone )
   },
-  (error) => {
-    // error
+  (xhr) => {
+    console.log( ( xhr.loaded / xhr.total ) * 100 + "% loaded" )
+  }
+)
+
+// model samsung
+let samsung
+modelLoader.load( "models/samsung/scene.gltf",
+  (gltf) => {
+    samsung = gltf.scene
+    samsung.scale.set( 30, 30, 30 )
+    samsung.position.set( 0, 3.03, 1 )
+    samsung.rotation.set( 0, 0, 0 )
+    scene.add( samsung )
+  },
+  (xhr) => {
+    console.log( ( xhr.loaded / xhr.total ) * 100 + "% loaded" )
+  }
+)
+
+// model xiaomi
+let xiaomi
+modelLoader.load( "models/xiaomi/scene.gltf",
+  (gltf) => {
+    xiaomi = gltf.scene
+    xiaomi.scale.set( 40, 40, 40 )
+    xiaomi.position.set( 0, 2.55, 7 )
+    xiaomi.rotation.set( 0, -88.9 * Math.PI / 4, 0 )
+    scene.add( xiaomi )
+  },
+  (xhr) => {
+    console.log( ( xhr.loaded / xhr.total ) * 100 + "% loaded" )
   }
 )
 
