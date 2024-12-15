@@ -5,25 +5,29 @@ canvas.webgl {
   z-index: 0;
 }
 
-.point-0 {
-  top: 20px;
-  left: 400px;
-  z-index: 10;  
+.point-0.visible {
+  position: absolute;
+  top: 33%;
+  left: 55.5%;
+  z-index: 10;
 }
 
-.point-1 {
-  top: 20px;
-  left: 300px;
-  z-index: 10;  
+.point-1.visible {
+  position: absolute;
+  top: 33%;
+  left: 49.5%;
+  z-index: 10;
 }
 
-.point-2 {
-  top: 20px;
-  left: 200px;
-  z-index: 10;  
+.point-2.visible{
+  position: absolute;
+  top: 33%;
+  left: 43.5%;
+  z-index: 10;
 }
 
-.point .label {
+.point.visible .label {
+  position: absolute;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -44,11 +48,12 @@ canvas.webgl {
   transform: scale(1.25);
 }
 
-.point.visible .label {
-  transform: scale(1, 1);
+.point .label {
+  transform: scale(0, 0);
 }
 
 .point .text {
+  position: absolute;
   width: auto;
   padding: 20px;
   border-radius: 4px;
@@ -65,5 +70,47 @@ canvas.webgl {
 }
 
 .point:hover .text {
+  opacity: 1;
+}
+
+.return {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  opacity: 0;
+}
+
+.return.visible {
+  opacity: 1;
+}
+
+.info {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  z-index: 10;
+  width: 30%;
+  height: auto;
+  padding: 20px;
+  border-radius: 4px;
+  background: #00000077;
+  border: 1px solid #ffffff77;
+  color: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+  opacity: 0;
+}
+
+.info-0.visible {
+  opacity: 1;
+}
+
+.info-1.visible {
+  opacity: 1;
+}
+
+.info-2.visible{
   opacity: 1;
 }

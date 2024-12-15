@@ -173,16 +173,49 @@ const stopFloating = (model) => {
 const raycaster = new Three.Raycaster();
 const mouse = new Three.Vector2();
 
+const returnButton = document.querySelector('.return');
+
 window.addEventListener('click', (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
 
+  if (!returnButton.classList.contains('visible')) {
+    returnButton.classList.add('visible');
+  }
+
+  for (const point of points) {
+    if (point.element.classList.contains('visible')) {
+      point.element.classList.remove('visible');
+    }
+  }
+
   const intersects = raycaster.intersectObjects(scene.children, true);
   if (intersects.length > 0) {
     const intersectedModel = intersects[0].object.userData.model;
     tiltCameraToModel(intersectedModel);
+
+    if (intersectedModel === smartphone) {
+      infos[0].element.classList.add('visible')
+    }
+    else {
+      infos[0].element.classList.remove('visible')
+    }
+
+    if (intersectedModel === samsung) {
+      infos[1].element.classList.add('visible')
+    }
+    else {
+      infos[1].element.classList.remove('visible')
+    }
+
+    if (intersectedModel === xiaomi) {
+      infos[2].element.classList.add('visible')
+    }
+    else {
+      infos[2].element.classList.remove('visible')
+    }
 
     if (lastSelectedModel === intersectedModel) {
       stopFloating(intersectedModel);
@@ -193,7 +226,137 @@ window.addEventListener('click', (event) => {
   }
 });
 
+// Puntos interactivos en la escena
+const infos = [
+  {
+    position: new Three.Vector3(8, 6.62, -9),
+    element: document.querySelector('.info-0'),
+    modelID: 'model_1',
+    text: 'Smartphone',
+  },
+  {
+    position: new Three.Vector3(0, 3.03, 1),
+    element: document.querySelector('.info-1'),
+    modelID: 'model_2',
+    text: 'Samsung',
+  },
+  {
+    position: new Three.Vector3(0, 2.55, 7),
+    element: document.querySelector('.info-2'),
+    modelID: 'model_3',
+    text: 'Xiaomi',
+  },
+];
+
+// Puntos interactivos en la escena
+const points = [
+  {
+    position: new Three.Vector3(8, 6.62, -9),
+    element: document.querySelector('.point-0'),
+    modelID: 'model_1',
+    text: 'Smartphone',
+  },
+  {
+    position: new Three.Vector3(0, 3.03, 1),
+    element: document.querySelector('.point-1'),
+    modelID: 'model_2',
+    text: 'Samsung',
+  },
+  {
+    position: new Three.Vector3(0, 2.55, 7),
+    element: document.querySelector('.point-2'),
+    modelID: 'model_3',
+    text: 'Xiaomi',
+  },
+];
+
+let sceneReady = false
+const loadingManager = new Three.LoadingManager(
+    () =>    {
+
+        window.setTimeout(() =>
+        {
+            sceneReady = true
+        }, 2000)
+    }
+)
+
+const tick = () =>{
+  if(sceneReady) {
+    for(const point of points)    {
+      for(const point of points)    {
+        const screenPosition = point.position.clone()
+        screenPosition.project(camera)
+        raycaster.setFromCamera(screenPosition, camera)
+        const intersects = raycaster.intersectObjects(scene.children, true)
+  
+        if(intersects.length === 0)   {
+          point.element.classList.add('visible')
+        }
+        else  {
+          const intersectionDistance = intersects[0].distance
+          const pointDistance = point.position.distanceTo(camera.position)
+          if(intersectionDistance < pointDistance)    {
+            point.element.classList.remove('visible')
+          }
+          else  {
+            point.element.classList.add('visible')
+          }
+        }
+      }
+    }
+  }
+}
+
+// Configuración de la posición inicial de la cámara
+const initialCameraPosition = new Three.Vector3(40, -2.8, 0);
+const initialCameraRotation = new Three.Euler(0, 90 * Math.PI / 4, 0);
+
+// Función para restablecer la cámara
+const resetCameraPosition = () => {
+  gsap.to(camera.position, {
+    x: initialCameraPosition.x,
+    y: initialCameraPosition.y,
+    z: initialCameraPosition.z,
+    duration: 1.5,
+    ease: "power2.out",
+  });
+
+  gsap.to(camera.rotation, {
+    x: initialCameraRotation.x,
+    y: initialCameraRotation.y,
+    z: initialCameraRotation.z,
+    duration: 1.5,
+    ease: "power2.out",
+  });
+
+  // Oculta el botón de retorno
+  returnButton.classList.remove('visible');
+
+  for (const point of points) {
+    point.element.classList.add('visible');
+  }
+
+  for (const info of infos) {
+    if (info.element.classList.contains('visible')) {
+      info.element.classList.remove('visible');
+    }
+  }
+
+  // Detener la animación flotante
+  if (lastSelectedModel) {
+    stopFloating(lastSelectedModel);
+    lastSelectedModel = null;
+  }
+};
+
+// Agrega el evento al botón de retorno
+returnButton.addEventListener('click', resetCameraPosition);
+
+
 function App() {
+  loadingManager
+  tick();
   renderer.render(scene, camera);
 }
 
